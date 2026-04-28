@@ -18,7 +18,6 @@ public class authController{
     @Autowired
     UsuarioServiceImpl usuarioServiceImpl;
 
-    //Creacion de usuarios
 
     @GetMapping("/MostrarRegistrarUsuario")
     public String MostrarFormularioCrearUsuario(Model model)
@@ -35,7 +34,6 @@ public class authController{
         return "redirect:/auth/MostrarInicioSesion";
     }
 
-    //Login de usuarios
 
     @GetMapping("/MostrarInicioSesion")
     public String MostrarInicioSesion()

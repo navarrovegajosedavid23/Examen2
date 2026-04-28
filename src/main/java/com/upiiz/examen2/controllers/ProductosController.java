@@ -23,7 +23,6 @@ public class ProductosController {
     @GetMapping("/nuevo")
     public String formularioNuevo(Model model) {
         model.addAttribute("producto", new ProductosEntity());
-        // Ajustado con 's' al final según tu captura de IntelliJ
         return "TablasFormularios/FormularioCrearProductos";
     }
 
@@ -37,7 +36,6 @@ public class ProductosController {
     public String formularioEditar(@PathVariable Long id, Model model) {
         ProductosEntity producto = productosService.getProductoPorId(id).orElse(null);
         model.addAttribute("producto", producto);
-        // Ajustado con 's' al final según tu captura de IntelliJ
         return "TablasFormularios/FormularioActualizarProductos";
     }
 

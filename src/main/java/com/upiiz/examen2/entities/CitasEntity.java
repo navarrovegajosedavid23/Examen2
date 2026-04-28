@@ -19,7 +19,6 @@ public class CitasEntity {
     public CitasEntity() {
     }
 
-    // Getters y Setters
     public Long getIdCita() { return idCita; }
     public void setIdCita(Long idCita) { this.idCita = idCita; }
 

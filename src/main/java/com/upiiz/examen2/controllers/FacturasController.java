@@ -18,14 +18,12 @@ public class FacturasController {
     @Autowired
     private CitasService citasService;
 
-    // Listar
     @GetMapping
     public String listar(Model model) {
         model.addAttribute("facturas", facturasService.listarFacturas());
         return "TablasFormularios/TablasFactura";
     }
 
-    // Nueva
     @GetMapping("/nueva")
     public String formularioNueva(Model model) {
         model.addAttribute("factura", new FacturasEntity());
@@ -33,14 +31,12 @@ public class FacturasController {
         return "TablasFormularios/FormularioCrearFacturas";
     }
 
-    // Guardar
     @PostMapping("/guardar")
     public String guardar(@ModelAttribute("factura") FacturasEntity factura) {
         facturasService.crearFactura(factura);
         return "redirect:/facturas";
     }
 
-    // Editar
     @GetMapping("/editar/{id}")
     public String formularioEditar(@PathVariable Long id, Model model) {
         FacturasEntity factura = facturasService.obtenerFacturaPorId(id).orElse(null);
@@ -48,7 +44,6 @@ public class FacturasController {
         return "TablasFormularios/FormulariosActualizarFactura";
     }
 
-    // Actualizar
     @PostMapping("/actualizar/{id}")
     public String actualizar(@PathVariable Long id, @ModelAttribute("factura") FacturasEntity factura) {
         factura.setIdFactura(id);
@@ -56,7 +51,6 @@ public class FacturasController {
         return "redirect:/facturas";
     }
 
-    // --- MOSTRAR FACTURA (IMPRESIÓN) ---
     @GetMapping("/mostrar/{id}")
     public String mostrarFactura(@PathVariable Long id, Model model) {
         FacturasEntity factura = facturasService.obtenerFacturaPorId(id).orElse(null);
@@ -64,7 +58,6 @@ public class FacturasController {
         return "TablasFormularios/MostrarFacturas";
     }
 
-    // Eliminar
     @GetMapping("/eliminar/{id}")
     public String eliminar(@PathVariable Long id) {
         facturasService.eliminarFactura(id);

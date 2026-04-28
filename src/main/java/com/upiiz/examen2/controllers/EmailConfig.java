@@ -12,8 +12,6 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 @Configuration
 
 public class EmailConfig {
-    // Aquí puedes configurar los detalles de tu servidor de correo electrónico
-    // como el host, puerto, usuario y contraseña.
     @Value("${email.username}")
     private String emailUsername;
 

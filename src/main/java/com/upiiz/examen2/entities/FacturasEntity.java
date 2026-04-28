@@ -21,7 +21,6 @@ public class FacturasEntity {
     private LocalDate fecha;
     private Double Total;
 
-    // NUEVOS CAMPOS
     private Integer cantidad;
     private String producto;
     private String descripcion;

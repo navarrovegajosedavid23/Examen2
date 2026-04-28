@@ -18,7 +18,6 @@ public class ProductosEntity {
     public ProductosEntity() {
     }
 
-    // Getters y Setters
     public Long getIdProducto() { return idProducto; }
     public void setIdProducto(Long idProducto) { this.idProducto = idProducto; }
 

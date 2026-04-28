@@ -25,20 +25,17 @@ public class homeController {
 
     @GetMapping("/MostrarInicio")
     public String inicio(Model model) {
-        // 1. Obtenemos el correo del usuario logueado
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         model.addAttribute("usuarioLogueado", username);
 
-        // 2. CONTAMOS los registros reales de la base de datos
         int totalFacturas = facturasService.listarFacturas().size();
         int totalCitas = citasService.listarCitas().size();
         int totalProductos = productosService.listarProductos().size();
 
-        // 3. MANDAMOS los números al HTML
         model.addAttribute("totalFacturas", totalFacturas);
         model.addAttribute("totalCitas", totalCitas);
         model.addAttribute("totalProductos", totalProductos);
 
-        return "index"; // O el nombre que tenga tu archivo (index.html)
+        return "index";
     }
 }

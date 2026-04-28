@@ -63,6 +63,5 @@ public class SpringConfig {
         return authProvider;
     }
 
-    //Implementacion de recuperacion de contraseña
     
 }
