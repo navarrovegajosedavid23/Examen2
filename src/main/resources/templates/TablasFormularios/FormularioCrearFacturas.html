@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Generar Factura | Clínica David</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+    <style>
+        /* Estilos para que al imprimir se vea limpia la hoja */
+        @media print {
+            .no-print { display: none !important; }
+            .input-group-text { border: none; background: transparent; }
+            input, select { border: none !important; box-shadow: none !important; outline: none !important; appearance: none; -webkit-appearance: none; }
+            .invoice { border: 0; margin: 0; padding: 0; }
+        }
+    </style>
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+    <div class="content-wrapper ml-0">
+        <section class="content-header no-print">
+            <div class="container-fluid">
+                <h1>Nueva Factura</h1>
+            </div>
+        </section>
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="invoice p-3 mb-3 shadow-sm">
+                    <div class="row">
+                        <div class="col-12">
+                            <h4>
+                                <i class="fas fa-globe"></i> CLÍNICA DAVID, Inc.
+                                <small class="float-right">Fecha: <input type="date" th:field="${factura.fecha}" form="formFactura" class="form-control d-inline-block w-auto"></small>
+                            </h4>
+                        </div>
+                    </div>
+
+                    <form id="formFactura" th:action="@{/facturas/guardar}" th:object="${factura}" method="post">
+                        <div class="row invoice-info mt-4">
+                            <div class="col-sm-4 invoice-col">
+                                De
+                                <address>
+                                    <strong>Admin, Inc.</strong><br>
+                                    Calera, Zacatecas<br>
+                                    Teléfono: (478) 123-4567<br>
+                                    Email: david@clinica.com
+                                </address>
+                            </div>
+                            <div class="col-sm-4 invoice-col">
+                                A (Paciente/Cliente)
+                                <address>
+                                    <input type="text" class="form-control mb-2" th:field="*{Cliente}" placeholder="Nombre del Cliente" required>
+                                    <input type="text" class="form-control" th:field="*{razonSocial}" placeholder="Razón Social / RFC">
+                                </address>
+                            </div>
+                            <div class="col-sm-4 invoice-col">
+                                <b>Factura #007612</b><br>
+                                <br>
+                                <b>ID Cita:</b>
+                                <select class="form-control d-inline-block w-50" th:field="*{cita}">
+                                    <option value="">Seleccionar Cita</option>
+                                    <option th:each="c : ${citas}" th:value="${c.idCita}" th:text="${c.idCita}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mt-4">
+                            <div class="col-12 table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 10%">Cant</th>
+                                        <th style="width: 30%">Producto/Servicio</th>
+                                        <th style="width: 40%">Descripción</th>
+                                        <th style="width: 20%">Subtotal</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <input type="number" class="form-control" value="1" min="1">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="Ej. Tratamiento Estético">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control" placeholder="Detalles del servicio...">
+                                        </td>
+                                        <td>
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    <span class="input-group-text">$</span>
+                                                </div>
+                                                <input type="number" step="0.01" class="form-control" th:field="*{Total}" placeholder="0.00" required>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="row no-print mt-4">
+                            <div class="col-12 text-right">
+                                <a th:href="@{/facturas}" class="btn btn-secondary float-left">
+                                    <i class="fas fa-arrow-left"></i> Regresar
+                                </a>
+                                <button type="button" class="btn btn-primary mr-2" onclick="window.print();">
+                                    <i class="fas fa-print"></i> Imprimir borrador
+                                </button>
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-save"></i> Guardar Factura
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
+</body>
+</html>
